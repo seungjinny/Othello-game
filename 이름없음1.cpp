@@ -5,7 +5,7 @@ void InvalidInput ()
 	else if ()
 		printf("Invalid input: no flip happens");
 	else if ()
-		printf("Invalid input: input number should be less than 6");
+		printf("Invalid input: the input number should be less than 6");
 	else 
 		printf("");
 }
