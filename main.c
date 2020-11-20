@@ -37,28 +37,31 @@ void GameBoard () // making the gameboard of othello
 }
 
 void status ()
-{
-	int a=2;
-	int b=2;
-	int wh_or_bl; // put a new (white or black) othello
+{ //put a new (white or black) othello
+	
+	int wh_or_bl; // defining whether the player is white or black 
 	int i,j; // 입력받을 수 scanf로 받기  
 	
-	printf("\nSTATUS - WHITE: %d, BLACK: %d\n\n", a, b);
 	
 	if (wh_or_bl++ % 2 == 0)
 	{
-		printf("put a new black othello: ");
+		printf("put a new white othello: "); // white's turn on even games
 		scanf("%d %d", &i, &j);
 	}
 	else
-		printf("put a new white othello: ");
+		printf("put a new black othello: "); // black's turn on odd games
 		scanf("%d %d", &i, &j);
+		
+	// ::flip result:: // invalid input
+	// (board)
+	// status - white: , black:
 }
 
 int main (void)
 {
-	printf("Welcome to the Othello Game!\n");
+	printf("Welcome to the Othello Game!\n\n");
 	GameBoard();
+	printf("\nSTATUS - WHITE: 2, BLACK: 2\n\n"); // initial status of the game
 	status();
 	
 	return 0;
