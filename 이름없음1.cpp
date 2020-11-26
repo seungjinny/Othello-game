@@ -1,4 +1,4 @@
-void InvalidInput ()
+void invalid ()
 {
 	if (board[6][6] != 0)
 		printf("Invalid input: already occupied"); 
@@ -6,6 +6,6 @@ void InvalidInput ()
 		printf("Invalid input: no flip happens");
 	else if ()
 		printf("Invalid input: the input number should be less than 6");
-	else 
-		printf("");
+	else
+		printf(" ");
 }
