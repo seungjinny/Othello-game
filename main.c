@@ -14,17 +14,17 @@ int board[size][size] = {
 	{0,0,0,0,0,0},
 	}; // 0: empty, 1: white, 2: black
 
+int wh=2, bl=2; // status에 나오는 white, black othello의 개수 전역변수로 선언  
+
 void GameBoard () // making the gameboard of othello 
 {
-	
 	printf("  0 1 2 3 4 5 \n");
 	printf(" -------------\n"); // 가로
-	
 	
 	int r,c; // declaring the rows and columns of the board
 	int name[size]={0,1,2,3,4,5}; // 세로 
 	
-		for (r=0; r<size; r++)
+		for (r=0; r<size; r++) 
 		{
 			printf("%d|", name[r]);
 			{
@@ -38,63 +38,283 @@ void GameBoard () // making the gameboard of othello
 			
 }
 
-void status ()
-{ //put a new (white or black) othello
+int num_of_wh (wh) //status에 나오는 white othello 개수 세는 함수 
+{
+	int i,j;
 	
-	int wh_or_bl; // defining whether the player is white or black 
+	for (i=0; i<size; i++)
+	for (j=0; j<size; j++)
+		if(board[i][j] == 1)
+			wh++;
+			
+	return wh;
+} 
+
+int num_of_bl (bl) //status에 나오는 black othello 개수 세는 함수  
+{
+	int i,j;
+	
+	for (i=0; i<size; i++)				
+	for (j=0; j<size; j++)
+		if(board[i][j] == 2)
+			bl++;
+			
+	return bl;
+}
+	
+	
+// void flip_othello
+	
+
+void game () // invalid, valid input 
+{ 
+	int player; // defining whether the player is white or black 
 	int i,j; // 입력받을 수 scanf로 받기  
-	int wh=0, bl=0; // STATUS에 표시되는 white/black 의 개수  
 	
-	
-	if (wh_or_bl++ % 2 != 0) // white's turn on odd games
+	if (player++ % 2 == 0) // white's turn on odd games
 	{ do // valid input 이 나올 때까지 한다  
-		{
+		{ 
 		printf("put a new white othello: "); 
 		scanf("%d %d", &i, &j); // 사용자로부터 값 입력 받기   
-		
-		for (i=0; i<size; i++)
-			if(board[i][j] == 1)
-				wh++;
-								
-		for (j=0; j<size; j++)
-			if(board[i][j] == 2)
-				bl++;
 			
 			{
-			if (i>5 || j>5)
+			if (i>5 || j>5) // invalid input 1: the input number should be less than 6
 				{
-					printf("invalid input: the input number should be less than 6\n");
-					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n", GameBoard, wh, bl);
+					printf("\ninvalid input: the input number should be less than 6\n");
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			
-			else if (board[i][j] == 1 || board[i][j] == 2)
+			else if (board[i][j] == 1 || board[i][j] == 2) // invalid input 2: already occupied
 				{				
-					printf("invalid input: already occupied\n\n"); 				
-					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n", GameBoard, wh, bl);
+					printf("\ninvalid input: already occupied\n\n"); 		
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			
-			else if (board[i][j] )
+			else if (board[i][j]  ) // invalid input 3: no flip happens
 				{
-					printf("invalid input: no flip happens\n\n");
-					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n", GameBoard, wh, bl);
+					printf("\ninvalid input: no flip happens\n\n");
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			} 
 				
-		} while (board[i][j]== 0); // valid input 이 나올 때까지 한다  
-			
-			
+		} while (board[i][j] ); // valid input 				
 	}
-	else
-		printf("put a new black othello: "); // black's turn on even games
-		scanf("%d %d", &i, &j); // 사용자로부터 값 입력 받기  
+	
+	else // black's turn on even games
+	{ do // valid input 이 나올 때까지 한다  
+		{ 
+		printf("put a new black othello: "); 
+		scanf("%d %d", &i, &j); // 사용자로부터 값 입력 받기   
 			
-			if (i>5 || j>5)
-				printf("invalid input: the input number should be less than 6");
+			{
+			if (i>5 || j>5) // invalid input 1: the input number should be less than 6
+				{
+					printf("\ninvalid input: the input number should be less than 6\n\n");
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
+				}
+			
+			else if (board[i][j] == 1 || board[i][j] == 2) // invalid input 2: already occupied
+				{				
+					printf("\ninvalid input: already occupied\n\n"); 		
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
+				}
+			
+			else if (board[i][j]  ) // invalid input 3: no flip happens
+				{
+					printf("\ninvalid input: no flip happens\n\n");
+					num_of_wh (wh);
+					num_of_bl (bl);
+					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
+				}
+			} 
+				
+		} while (board[i][j] /*flip_othello*/ ); // valid input 				
+	}		
 		
-	// ::flip result:: 
+		
+	
 	
 }
 
+void flip_othello()
+{
+	int i,j;
+	int x,y;
+	
+	// left 
+	for(j=y-1; j>=0; j--)
+	{
+		if (board[x][j]==2) // flip black to white
+			board[x][j]=1;
+		else break;
+	}
+	
+	if (board[x][j] != 1)
+	{
+		for (j=y-1; j>=0; j--)
+		{
+			if (board[x][j]==1) // flip white to black
+				board[x][j]=2;
+			else break;
+		}
+	}
+	
+	//right
+		for(j=y+1; j<size; j++)
+	{
+		if (board[x][j]==2) // flip black to white
+			board[x][j]=1;
+		else break;
+	}
+	
+	if (board[x][j] != 1)
+	{
+		for (j=y+1; j<size; j++)
+		{
+			if (board[x][j]==1) // flip white to black
+				board[x][j]=2;
+			else break;
+		}
+	}
+	
+	//up
+		for(i=x-1; i>=0; i--)
+	{
+		if (board[i][y]==2) // flip black to white
+			board[i][y]=1;
+		else break;
+	}
+	
+	if (board[i][y] != 1)
+	{
+		for (i=x-1; i>=0; i--)
+		{
+			if (board[i][y]==1) // flip white to black
+				board[i][y]=2;
+			else break;
+		}
+	}
+	
+	//down
+		for(i=x+1; i<size; i++)
+	{
+		if (board[i][y]==2) // flip black to white
+			board[i][y]=1;
+		else break;
+	}
+	
+	if (board[i][y] != 1)
+	{
+		for (i=x+1; i<size; i++)
+		{
+			if (board[i][y]==1) // flip white to black
+				board[i][y]=2;
+			else break;
+		}
+	}
+	
+	//upper left diagnol
+	i = x-1; j= y-1;
+	
+	while (i>=0 && j>=0)
+	{
+		if (board[i][j]==2) // flip black to white
+			board[i][j]=1;
+		else break; 
+			i--; j--;	
+	} 
+	
+	if (board[i][j] != 1)
+	{
+		i = x-1; j = y-1;
+		while (i>=0 && j>=0)
+		{
+			if (board[i][j]==1) // flip white to black 
+				board[i][j]=2;
+			else break; 
+				i--; j--;
+		}
+	}
+	
+	// upper right diagonal 
+	i = x-1; j= y+1;
+	
+	while (i>=0 && j<size)
+	{
+		if (board[i][j]==2) // flip black to white
+			board[i][j]=1;
+		else break; 
+			i--; j++;	
+	} 
+	
+	if (board[i][j] != 1)
+	{
+		i = x-1; j = y+1;
+		while (i>=0 && j<size)
+		{
+			if (board[i][j]==1) // flip white to black 
+				board[i][j]=2;
+			else break; 
+				i--; j++;
+		}
+	}
+	
+	// bottom left diagonal 
+	i = x+1; j= y-1;
+	
+	while (i<size && j>=0)
+	{
+		if (board[i][j]==2) // flip black to white
+			board[i][j]=1;
+		else break; 
+			i++; j--;	
+	} 
+	
+	if (board[i][j] != 1)
+	{
+		i = x+1; j = y-1;
+		while (i<size && j>=0)
+		{
+			if (board[i][j]==1) // flip white to black 
+				board[i][j]=2;
+			else break; 
+				i++; j--;
+		}
+	}
+	
+	// bottom right diagonal
+	i = x+1; j= y+1;
+	
+	while (i<size && j<size)
+	{
+		if (board[i][j]==2) // flip black to white
+			board[i][j]=1;
+		else break; 
+			i++; j++;	
+	} 
+	
+	if (board[i][j] != 1)
+	{
+		i = x+1; j = y+1;
+		while (i<size && j<size)
+		{
+			if (board[i][j]==1) // flip white to black 
+				board[i][j]=2;
+			else break; 
+				i++; j++;
+		}
+	}
+}
 
 
 int main (void)
@@ -102,7 +322,7 @@ int main (void)
 	printf("Welcome to the Othello Game!\n\n");
 	GameBoard();
 	printf("\nSTATUS - WHITE: 2, BLACK: 2\n\n"); // initial status of the game
-	status();
+	game();
 	
 	return 0;
 }
