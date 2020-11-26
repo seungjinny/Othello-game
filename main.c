@@ -62,8 +62,7 @@ int num_of_bl (bl) //status에 나오는 black othello 개수 세는 함수
 	return bl;
 }
 	
-	
-// void flip_othello
+
 	
 
 void game () // invalid input 
@@ -73,7 +72,7 @@ void game () // invalid input
 	
 	
 	// WHITE 
-	if (player++ % 2 == 0) // white's turn on odd games
+	if (player++ % 2 == 0) // player is white, white's turn on odd games
 	{ do // valid input 이 나올 때까지 한다  
 		{ 
 		printf("put a new white othello: "); 
@@ -96,7 +95,7 @@ void game () // invalid input
 					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			
-			else if ( /* 포위된 돌이 없읍 */ )
+			else if ( board[i][j] /* 포위되지 않은 돌에 대한 조건 */)
 				// invalid input 3: no flip happens 포위하지 않기 때문에   
 				{
 					printf("invalid input: no flip happens\n\n");
@@ -114,12 +113,12 @@ void game () // invalid input
 				} 
 			} 
 				
-		} while ( flip_othello() ); // valid input 			
+		} while ( board[i][j] /* 돌을 뒤집을 수 있는 경우를 나타내는 조건 */ ); // valid input 			
 	}
 	
 	
 	// BLACK 
-	else // black's turn on even games
+	else // player is black, black's turn on even games
 	{ do // valid input 이 나올 때까지 한다  
 		{ 
 		printf("put a new black othello: "); 
@@ -142,7 +141,7 @@ void game () // invalid input
 					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			
-			else if (board[i-1][j-1]==2 || board[i-1][j]==2 || board[i-1][j+1]==2 || board[i][j-1]==2 || board[i][j+1]==2 || board[i+1][j-1]==2 || board[i+1][j]==2 || board[i+1][j+1]==2) 
+			else if (board[i][j] /* 포위되지 않은 돌에 대한 조건 */) 
 				// invalid input 3: no flip happens 포위하지 않기 때문에  
 				{
 					printf("invalid input: no flip happens\n\n");
@@ -159,7 +158,7 @@ void game () // invalid input
 					printf("%d \n\nSTATUS - WHITE : %d, BLACK : %d\n\n", GameBoard, wh, bl);
 				}
 			} 			
-		} while (board[i][j] /*flip othello*/ ); // valid input 				
+		} while (board[i][j] /* 돌을 뒤집을 수 있는 경우에 대한 조건 */ ); // valid input 				
 	}			
 }
 
